@@ -1,3 +1,5 @@
+import json
+
 import torch
 from torch.utils.data import DataLoader
 from transformers import PreTrainedTokenizerFast
@@ -12,27 +14,7 @@ from model.combined_lstm import CombinedLSTMModel
 # Config
 # -----------------------
 TOKENIZER_PATH = "../DBs_Randika/trained_assembly_tokenizer/fast_tokenizer"
-
-RUN_SPECS = [
-    CacheRunConfig(
-        db_path="../DBs_Randika/cache_stats_1769606772.db",
-        l1d_size=1024,
-        l1i_size=1024,
-        ll_size=1024,
-    ),
-    CacheRunConfig(
-        db_path="../DBs_Randika/cache_stats_1769606774.db",
-        l1d_size=1024,
-        l1i_size=1024,
-        ll_size=1024,
-    ),
-    CacheRunConfig(
-        db_path="../DBs_Randika/cache_stats_1769606778.db",
-        l1d_size=1024,
-        l1i_size=1024,
-        ll_size=1024,
-    ),
-]
+RUN_CONFIG_PATH = "./config/runs.json"
 
 SEQ_LEN = 200
 MAX_TOKEN_LEN = 15
@@ -40,16 +22,41 @@ BATCH_SIZE = 32
 EPOCHS = 10
 LR = 1e-3
 
+
+def load_run_specs(config_path, split):
+    with open(config_path, "r", encoding="utf-8") as f:
+        manifest = json.load(f)
+
+    run_specs = []
+    for entry in manifest:
+        if entry.get("split") != split:
+            continue
+
+        run_specs.append(
+            CacheRunConfig(
+                db_path=entry["db_path"],
+                l1d_size=entry["l1d_size"],
+                l1i_size=entry["l1i_size"],
+                ll_size=entry["ll_size"],
+            )
+        )
+
+    if not run_specs:
+        raise ValueError(f"No run specs found for split='{split}' in {config_path}")
+
+    return run_specs
+
 # -----------------------
 # Load tokenizer
 # -----------------------
 tokenizer = PreTrainedTokenizerFast.from_pretrained(TOKENIZER_PATH)
+run_specs = load_run_specs(RUN_CONFIG_PATH, split="train")
 
 # -----------------------
 # Dataset & Loader
 # -----------------------
 dataset = CacheTraceDataset(
-    runs=RUN_SPECS,
+    runs=run_specs,
     tokenizer=tokenizer,
     sequence_length=SEQ_LEN,
     max_token_length=MAX_TOKEN_LEN,

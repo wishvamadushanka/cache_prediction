@@ -1,0 +1,32 @@
+[
+  {
+    "name": "run_1769606772",
+    "db_path": "../DBs_Randika/cache_stats_1769606772.db",
+    "program": "custom_test_program",
+    "split": "train",
+    "l1d_size": 1024,
+    "l1i_size": 1024,
+    "ll_size": 1024,
+    "cores": 1
+  },
+  {
+    "name": "run_1769606774",
+    "db_path": "../DBs_Randika/cache_stats_1769606774.db",
+    "program": "custom_test_program",
+    "split": "train",
+    "l1d_size": 1024,
+    "l1i_size": 1024,
+    "ll_size": 1024,
+    "cores": 1
+  },
+  {
+    "name": "run_1769606778",
+    "db_path": "../DBs_Randika/cache_stats_1769606778.db",
+    "program": "custom_test_program",
+    "split": "predict",
+    "l1d_size": 1024,
+    "l1i_size": 1024,
+    "ll_size": 1024,
+    "cores": 1
+  }
+]
