@@ -1,21 +1,27 @@
 import torch
 from transformers import PreTrainedTokenizerFast
-from dataset.cache_dataset import CacheTraceDataset
+from dataset.cache_dataset import CacheRunConfig, CacheTraceDataset
 from model.combined_lstm import CombinedLSTMModel
 
 # -----------------------
 # Config
 # -----------------------
-DB_PATH = "./DBs_Randika/cache_stats_1769606772.db"
-TOKENIZER_PATH = "./DBs_Randika/trained_assembly_tokenizer/fast_tokenizer"
+RUN_SPEC = CacheRunConfig(
+    db_path="../DBs_Randika/cache_stats_1769606772.db",
+    l1d_size=1024,
+    l1i_size=1024,
+    ll_size=1024,
+)
+TOKENIZER_PATH = "../DBs_Randika/trained_assembly_tokenizer/fast_tokenizer"
 
-SEQ_LEN = 16
+SEQ_LEN = 200
 MAX_TOKEN_LEN = 15
 
 # -----------------------
 # Device
 # -----------------------
-device = "cuda" if torch.cuda.is_available() else "cpu"
+device = "cpu"
+
 
 # -----------------------
 # Load tokenizer
@@ -26,10 +32,10 @@ tokenizer = PreTrainedTokenizerFast.from_pretrained(TOKENIZER_PATH)
 # Create dataset (for inference you can set sequence_length=SEQ_LEN)
 # -----------------------
 dataset = CacheTraceDataset(
-    db_path=DB_PATH,
+    runs=[RUN_SPEC],
     tokenizer=tokenizer,
     sequence_length=SEQ_LEN,
-    max_token_length=MAX_TOKEN_LEN
+    max_token_length=MAX_TOKEN_LEN,
 )
 
 # -----------------------
@@ -65,3 +71,4 @@ with torch.no_grad():
 
 print("Predicted cache misses:", predicted_misses.cpu().numpy())
 print("Actual cache misses:   ", actual_misses.numpy())
+dataset.close()

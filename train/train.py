@@ -2,7 +2,7 @@ import torch
 from torch.utils.data import DataLoader
 from transformers import PreTrainedTokenizerFast
 
-from dataset.cache_dataset import CacheTraceDataset
+from dataset.cache_dataset import CacheRunConfig, CacheTraceDataset
 from model.combined_lstm import CombinedLSTMModel
 
 # from dataset.cache_dataset import CacheTraceDataset
@@ -11,12 +11,30 @@ from model.combined_lstm import CombinedLSTMModel
 # -----------------------
 # Config
 # -----------------------
-DB_PATH = "./DBs_Randika/cache_stats_1769606772.db"
-# DB_PATH = "data/raw/traces.db"
-TOKENIZER_PATH = "./DBs_Randika/trained_assembly_tokenizer/fast_tokenizer"
-# TOKENIZER_PATH = "tokenizer/trained_tokenizer/fast_tokenizer"
+TOKENIZER_PATH = "../DBs_Randika/trained_assembly_tokenizer/fast_tokenizer"
 
-SEQ_LEN = 16
+RUN_SPECS = [
+    CacheRunConfig(
+        db_path="../DBs_Randika/cache_stats_1769606772.db",
+        l1d_size=1024,
+        l1i_size=1024,
+        ll_size=1024,
+    ),
+    CacheRunConfig(
+        db_path="../DBs_Randika/cache_stats_1769606774.db",
+        l1d_size=1024,
+        l1i_size=1024,
+        ll_size=1024,
+    ),
+    CacheRunConfig(
+        db_path="../DBs_Randika/cache_stats_1769606778.db",
+        l1d_size=1024,
+        l1i_size=1024,
+        ll_size=1024,
+    ),
+]
+
+SEQ_LEN = 200
 MAX_TOKEN_LEN = 15
 BATCH_SIZE = 32
 EPOCHS = 10
@@ -31,10 +49,10 @@ tokenizer = PreTrainedTokenizerFast.from_pretrained(TOKENIZER_PATH)
 # Dataset & Loader
 # -----------------------
 dataset = CacheTraceDataset(
-    db_path=DB_PATH,
+    runs=RUN_SPECS,
     tokenizer=tokenizer,
     sequence_length=SEQ_LEN,
-    max_token_length=MAX_TOKEN_LEN
+    max_token_length=MAX_TOKEN_LEN,
 )
 
 # print("Dataset length:", len(dataset))
@@ -56,7 +74,7 @@ model = CombinedLSTMModel(
     dropout=0.2,
 )
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
+device = "cpu"
 model.to(device)
 
 # -----------------------
@@ -75,7 +93,7 @@ for epoch in range(EPOCHS):
     for token_ids, access_feats, targets in loader:
         token_ids = token_ids.to(device)
         access_feats = access_feats.to(device)
-        # targets = targets.to(device).unsqueeze(1)
+        targets = targets.to(device)
 
         optimizer.zero_grad()
         preds = model(token_ids, access_feats)
@@ -91,3 +109,4 @@ for epoch in range(EPOCHS):
     )
 
 torch.save(model.state_dict(), "combined_lstm.pt")
+dataset.close()
