@@ -21,7 +21,7 @@ device = "cpu"
 # Load tokenizer
 # -----------------------
 tokenizer = PreTrainedTokenizerFast.from_pretrained(TOKENIZER_PATH)
-run_specs = load_run_specs(RUN_CONFIG_PATH, split="predict")
+run_specs = load_run_specs(RUN_CONFIG_PATH, split="test")
 
 # -----------------------
 # Create dataset (for inference you can set sequence_length=SEQ_LEN)
