@@ -16,7 +16,7 @@ TOKENIZER_PATH = "../DBs_Randika/trained_assembly_tokenizer/fast_tokenizer"
 RUN_CONFIG_PATH = "./config/runs.json"
 MODEL_PATH = "./combined_lstm.pt"
 
-EVAL_SPLIT = None
+EVAL_SPLIT = "test"
 SEQ_LEN = 200
 MAX_TOKEN_LEN = 15
 BATCH_SIZE = 32
@@ -89,6 +89,12 @@ def main():
     )
 
     loader = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=False)
+
+    print(
+        f"Evaluating {len(run_specs)} test runs | "
+        f"{len(dataset)} windows | "
+        f"{len(loader)} batches"
+    )
 
     model = CombinedLSTMModel(
         token_vocab_size=tokenizer.vocab_size,

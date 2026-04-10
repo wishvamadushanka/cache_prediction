@@ -7,7 +7,8 @@
     "l1d_size": 1024,
     "l1i_size": 1024,
     "ll_size": 1024,
-    "cores": 1
+    "cores": 1,
+    "max_rows": 2000
   },
   {
     "name": "run_1769606774",
@@ -17,7 +18,8 @@
     "l1d_size": 1024,
     "l1i_size": 1024,
     "ll_size": 1024,
-    "cores": 1
+    "cores": 1,
+    "max_rows": 2000
   },
   {
     "name": "run_1769606778",
@@ -27,6 +29,7 @@
     "l1d_size": 1024,
     "l1i_size": 1024,
     "ll_size": 1024,
-    "cores": 1
+    "cores": 1,
+    "max_rows": 2000
   }
 ]

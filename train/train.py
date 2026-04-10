@@ -42,6 +42,12 @@ dataset = CacheTraceDataset(
 
 loader = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=True)
 
+print(
+    f"Loaded {len(run_specs)} train runs | "
+    f"{len(dataset)} windows | "
+    f"{len(loader)} batches per epoch"
+)
+
 # -----------------------
 # Model
 # -----------------------
