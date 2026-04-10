@@ -13,6 +13,10 @@ class CacheRunConfig:
     l1d_size: int
     l1i_size: int
     ll_size: int
+    name: str | None = None
+    program: str | None = None
+    split: str | None = None
+    cores: int | None = None
     instruction_column: str = "preprocessed_instruction"
     fallback_instruction_column: str = "disassembly_string"
     max_rows: int | None = None
@@ -220,6 +224,20 @@ class CacheTraceDataset(Dataset):
         )
 
         return token_ids, access_tensor, target_tensor
+
+    def get_sample_metadata(self, idx):
+        run, window_idx = self._resolve_sample(idx)
+        return {
+            "run_name": run.name or Path(run.db_path).stem,
+            "program": run.program,
+            "split": run.split,
+            "db_path": run.db_path,
+            "cores": run.cores,
+            "l1d_size": run.l1d_size,
+            "l1i_size": run.l1i_size,
+            "ll_size": run.ll_size,
+            "window_idx": window_idx,
+        }
 
     def close(self):
         for connection in self._connections.values():

@@ -1,8 +1,7 @@
-import json
-
 import torch
 from transformers import PreTrainedTokenizerFast
-from dataset.cache_dataset import CacheRunConfig, CacheTraceDataset
+from config.run_manifest import load_run_specs
+from dataset.cache_dataset import CacheTraceDataset
 from model.combined_lstm import CombinedLSTMModel
 
 # -----------------------
@@ -18,32 +17,6 @@ MAX_TOKEN_LEN = 15
 # Device
 # -----------------------
 device = "cpu"
-
-
-def load_run_specs(config_path, split):
-    with open(config_path, "r", encoding="utf-8") as f:
-        manifest = json.load(f)
-
-    run_specs = []
-    for entry in manifest:
-        if entry.get("split") != split:
-            continue
-
-        run_specs.append(
-            CacheRunConfig(
-                db_path=entry["db_path"],
-                l1d_size=entry["l1d_size"],
-                l1i_size=entry["l1i_size"],
-                ll_size=entry["ll_size"],
-            )
-        )
-
-    if not run_specs:
-        raise ValueError(f"No run specs found for split='{split}' in {config_path}")
-
-    return run_specs
-
-
 # -----------------------
 # Load tokenizer
 # -----------------------
