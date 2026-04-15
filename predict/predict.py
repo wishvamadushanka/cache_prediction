@@ -1,29 +1,31 @@
 import torch
 from transformers import PreTrainedTokenizerFast
 from config.run_manifest import load_run_specs
+from config.settings_loader import load_settings
 from dataset.cache_dataset import CacheTraceDataset
 from model.combined_lstm import CombinedLSTMModel
 
 # -----------------------
 # Config
 # -----------------------
-TOKENIZER_PATH = "../DBs_Randika/trained_assembly_tokenizer/fast_tokenizer"
 RUN_CONFIG_PATH = "./config/runs.json"
-
-SEQ_LEN = 200
-MAX_TOKEN_LEN = 15
-HIDDEN_DIM = 330
-DROPOUT = 0.05
+SETTINGS_PATH = "./config/settings.json"
 
 # -----------------------
 # Device
 # -----------------------
-device = "cpu"
+settings = load_settings(SETTINGS_PATH)
+paths = settings["paths"]
+model_settings = settings["model"]
+test_settings = settings["test"]
+
+TOKENIZER_PATH = paths["tokenizer_path"]
+device = settings["device"]
 # -----------------------
 # Load tokenizer
 # -----------------------
 tokenizer = PreTrainedTokenizerFast.from_pretrained(TOKENIZER_PATH)
-run_specs = load_run_specs(RUN_CONFIG_PATH, split="test")
+run_specs = load_run_specs(RUN_CONFIG_PATH, split=test_settings["split"])
 
 # -----------------------
 # Create dataset (for inference you can set sequence_length=SEQ_LEN)
@@ -31,8 +33,8 @@ run_specs = load_run_specs(RUN_CONFIG_PATH, split="test")
 dataset = CacheTraceDataset(
     runs=run_specs,
     tokenizer=tokenizer,
-    sequence_length=SEQ_LEN,
-    max_token_length=MAX_TOKEN_LEN,
+    sequence_length=test_settings["sequence_length"],
+    max_token_length=test_settings["max_token_length"],
 )
 
 # -----------------------
@@ -40,14 +42,14 @@ dataset = CacheTraceDataset(
 # -----------------------
 model = CombinedLSTMModel(
     token_vocab_size=tokenizer.vocab_size,
-    token_embedding_dim=15,
+    token_embedding_dim=model_settings["token_embedding_dim"],
     access_feature_size=11,
-    hidden_dim=HIDDEN_DIM,
-    output_dim=3,
-    num_layers=2,
-    dropout=DROPOUT,
+    hidden_dim=model_settings["hidden_dim"],
+    output_dim=model_settings["output_dim"],
+    num_layers=model_settings["num_layers"],
+    dropout=model_settings["dropout"],
 )
-model.load_state_dict(torch.load("combined_lstm.pt", map_location=device))
+model.load_state_dict(torch.load(paths["model_path"], map_location=device))
 model.to(device)
 model.eval()
 

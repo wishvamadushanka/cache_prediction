@@ -7,25 +7,15 @@ from torch.utils.data import DataLoader
 from transformers import PreTrainedTokenizerFast
 
 from config.run_manifest import load_run_specs
+from config.settings_loader import load_settings
 from dataset.cache_dataset import CacheTraceDataset
 from model.combined_lstm import CombinedLSTMModel
 
 # -----------------------
 # Config
 # -----------------------
-TOKENIZER_PATH = "../DBs_Randika/trained_assembly_tokenizer/fast_tokenizer"
 RUN_CONFIG_PATH = "./config/runs.json"
-MODEL_PATH = "./combined_lstm.pt"
-OUTPUT_DIR = "./artifacts/evaluation"
-
-EVAL_SPLIT = "test"
-SEQ_LEN = 200
-MAX_TOKEN_LEN = 15
-BATCH_SIZE = 32
-HIDDEN_DIM = 330
-DROPOUT = 0.05
-
-device = "cpu"
+SETTINGS_PATH = "./config/settings.json"
 CACHE_LABELS = ("L1D", "L1I", "LL")
 
 
@@ -110,34 +100,45 @@ def write_window_predictions_csv(output_path, rows):
 
 
 def main():
-    tokenizer = PreTrainedTokenizerFast.from_pretrained(TOKENIZER_PATH)
-    run_specs = load_run_specs(RUN_CONFIG_PATH, split=EVAL_SPLIT)
+    settings = load_settings(SETTINGS_PATH)
+    paths = settings["paths"]
+    model_settings = settings["model"]
+    test_settings = settings["test"]
+
+    tokenizer_path = paths["tokenizer_path"]
+    model_path = paths["model_path"]
+    output_dir = paths["evaluation_output_dir"]
+    eval_split = test_settings["split"]
+    device = settings["device"]
+
+    tokenizer = PreTrainedTokenizerFast.from_pretrained(tokenizer_path)
+    run_specs = load_run_specs(RUN_CONFIG_PATH, split=eval_split)
 
     dataset = CacheTraceDataset(
         runs=run_specs,
         tokenizer=tokenizer,
-        sequence_length=SEQ_LEN,
-        max_token_length=MAX_TOKEN_LEN,
+        sequence_length=test_settings["sequence_length"],
+        max_token_length=test_settings["max_token_length"],
     )
 
-    loader = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=False)
+    loader = DataLoader(dataset, batch_size=test_settings["batch_size"], shuffle=False)
 
     print(
-        f"Evaluating {len(run_specs)} test runs | "
+        f"Evaluating {len(run_specs)} {eval_split} runs | "
         f"{len(dataset)} windows | "
         f"{len(loader)} batches"
     )
 
     model = CombinedLSTMModel(
         token_vocab_size=tokenizer.vocab_size,
-        token_embedding_dim=15,
+        token_embedding_dim=model_settings["token_embedding_dim"],
         access_feature_size=11,
-        hidden_dim=HIDDEN_DIM,
-        output_dim=3,
-        num_layers=2,
-        dropout=DROPOUT,
+        hidden_dim=model_settings["hidden_dim"],
+        output_dim=model_settings["output_dim"],
+        num_layers=model_settings["num_layers"],
+        dropout=model_settings["dropout"],
     )
-    model.load_state_dict(torch.load(MODEL_PATH, map_location=device))
+    model.load_state_dict(torch.load(model_path, map_location=device))
     model.to(device)
     model.eval()
 
@@ -197,7 +198,7 @@ def main():
         metrics = compute_metrics(run_targets[run_name], run_predictions[run_name])
         print_metrics(f"Run Metrics: {run_name}", metrics)
 
-    output_path = Path(OUTPUT_DIR) / f"window_predictions_{EVAL_SPLIT or 'all'}.csv"
+    output_path = Path(output_dir) / f"window_predictions_{eval_split or 'all'}.csv"
     write_window_predictions_csv(output_path, prediction_rows)
     print(f"\nSaved per-window predictions to {output_path}")
 
