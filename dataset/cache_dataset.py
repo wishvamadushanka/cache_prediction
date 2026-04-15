@@ -1,4 +1,5 @@
 import bisect
+import re
 import sqlite3
 from dataclasses import dataclass
 from pathlib import Path
@@ -154,6 +155,17 @@ class CacheTraceDataset(Dataset):
 
         return rows
 
+    @staticmethod
+    def _clean_disassembly_string(instruction_text):
+        if instruction_text is None:
+            return ""
+
+        match = re.search(r"([0-9a-f]{2} )+", instruction_text.lower())
+        if match:
+            return instruction_text[match.end() :].strip()
+
+        return instruction_text.strip()
+
     def __len__(self):
         return self.total_samples
 
@@ -184,7 +196,9 @@ class CacheTraceDataset(Dataset):
                 fallback_instruction_text,
             ) = row
 
-            final_instruction = instruction_text or fallback_instruction_text or ""
+            final_instruction = instruction_text or self._clean_disassembly_string(
+                fallback_instruction_text
+            )
             instructions.append(final_instruction)
 
             access_features.append(

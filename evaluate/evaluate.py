@@ -1,4 +1,5 @@
 import math
+from pathlib import Path
 
 import numpy as np
 import torch
@@ -15,11 +16,14 @@ from model.combined_lstm import CombinedLSTMModel
 TOKENIZER_PATH = "../DBs_Randika/trained_assembly_tokenizer/fast_tokenizer"
 RUN_CONFIG_PATH = "./config/runs.json"
 MODEL_PATH = "./combined_lstm.pt"
+OUTPUT_DIR = "./artifacts/evaluation"
 
 EVAL_SPLIT = "test"
 SEQ_LEN = 200
 MAX_TOKEN_LEN = 15
 BATCH_SIZE = 32
+HIDDEN_DIM = 330
+DROPOUT = 0.05
 
 device = "cpu"
 CACHE_LABELS = ("L1D", "L1I", "LL")
@@ -77,6 +81,34 @@ def print_metrics(title, metrics):
         )
 
 
+def write_window_predictions_csv(output_path, rows):
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    header = [
+        "run_name",
+        "program",
+        "split",
+        "db_path",
+        "cores",
+        "l1d_size",
+        "l1i_size",
+        "ll_size",
+        "window_idx",
+        "actual_l1d",
+        "pred_l1d",
+        "actual_l1i",
+        "pred_l1i",
+        "actual_ll",
+        "pred_ll",
+    ]
+
+    with output_path.open("w", encoding="utf-8", newline="") as f:
+        f.write(",".join(header) + "\n")
+        for row in rows:
+            values = [str(row[column]) for column in header]
+            f.write(",".join(values) + "\n")
+
+
 def main():
     tokenizer = PreTrainedTokenizerFast.from_pretrained(TOKENIZER_PATH)
     run_specs = load_run_specs(RUN_CONFIG_PATH, split=EVAL_SPLIT)
@@ -100,10 +132,10 @@ def main():
         token_vocab_size=tokenizer.vocab_size,
         token_embedding_dim=15,
         access_feature_size=11,
-        hidden_dim=128,
+        hidden_dim=HIDDEN_DIM,
         output_dim=3,
         num_layers=2,
-        dropout=0.2,
+        dropout=DROPOUT,
     )
     model.load_state_dict(torch.load(MODEL_PATH, map_location=device))
     model.to(device)
@@ -113,6 +145,7 @@ def main():
     all_predictions = []
     run_targets = {}
     run_predictions = {}
+    prediction_rows = []
 
     sample_index = 0
     with torch.no_grad():
@@ -132,6 +165,26 @@ def main():
 
                 run_targets.setdefault(run_name, []).append(batch_targets[row_idx])
                 run_predictions.setdefault(run_name, []).append(predictions[row_idx])
+
+                prediction_rows.append(
+                    {
+                        "run_name": run_name,
+                        "program": metadata["program"] or "",
+                        "split": metadata["split"] or "",
+                        "db_path": metadata["db_path"],
+                        "cores": metadata["cores"] if metadata["cores"] is not None else "",
+                        "l1d_size": metadata["l1d_size"],
+                        "l1i_size": metadata["l1i_size"],
+                        "ll_size": metadata["ll_size"],
+                        "window_idx": metadata["window_idx"],
+                        "actual_l1d": float(batch_targets[row_idx][0]),
+                        "pred_l1d": float(predictions[row_idx][0]),
+                        "actual_l1i": float(batch_targets[row_idx][1]),
+                        "pred_l1i": float(predictions[row_idx][1]),
+                        "actual_ll": float(batch_targets[row_idx][2]),
+                        "pred_ll": float(predictions[row_idx][2]),
+                    }
+                )
                 sample_index += 1
 
     all_targets = np.concatenate(all_targets, axis=0)
@@ -143,6 +196,10 @@ def main():
     for run_name in sorted(run_targets):
         metrics = compute_metrics(run_targets[run_name], run_predictions[run_name])
         print_metrics(f"Run Metrics: {run_name}", metrics)
+
+    output_path = Path(OUTPUT_DIR) / f"window_predictions_{EVAL_SPLIT or 'all'}.csv"
+    write_window_predictions_csv(output_path, prediction_rows)
+    print(f"\nSaved per-window predictions to {output_path}")
 
     dataset.close()
 

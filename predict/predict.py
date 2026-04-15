@@ -12,6 +12,8 @@ RUN_CONFIG_PATH = "./config/runs.json"
 
 SEQ_LEN = 200
 MAX_TOKEN_LEN = 15
+HIDDEN_DIM = 330
+DROPOUT = 0.05
 
 # -----------------------
 # Device
@@ -40,10 +42,10 @@ model = CombinedLSTMModel(
     token_vocab_size=tokenizer.vocab_size,
     token_embedding_dim=15,
     access_feature_size=11,
-    hidden_dim=128,
+    hidden_dim=HIDDEN_DIM,
     output_dim=3,
     num_layers=2,
-    dropout=0.2,
+    dropout=DROPOUT,
 )
 model.load_state_dict(torch.load("combined_lstm.pt", map_location=device))
 model.to(device)
