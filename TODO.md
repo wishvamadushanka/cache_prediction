@@ -5,6 +5,7 @@ Goal: reproduce the pipeline and experiment design from the paper
 
 ## Current Status
 
+- [x] Keep DB preprocessing under `cache_prediction/preprocess`
 - [x] Build a manifest-driven pipeline for runs and settings
 - [x] Implement multi-run subsequence dataset loading from SQLite
 - [x] Use non-overlapping subsequences
@@ -36,6 +37,8 @@ Goal: reproduce the pipeline and experiment design from the paper
 
 ## Code / Pipeline Improvements
 
+- [ ] Document the full pipeline order: preprocess DBs -> train tokenizer -> train model -> evaluate
+- [ ] Decide whether preprocessing should stay as a manual step or be wrapped by a helper script
 - [ ] Improve training/evaluation artifact naming and output organization
 - [ ] Add config validation for `runs.json` and `settings.json`
 - [ ] Add clearer logging for long runs
@@ -68,4 +71,3 @@ Goal: reproduce the pipeline and experiment design from the paper
 - [ ] Add checkpoint versioning
 - [ ] Add seed control for reproducibility
 - [ ] Add a small README section for how to reproduce the experiment
-
