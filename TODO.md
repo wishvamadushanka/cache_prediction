@@ -20,6 +20,18 @@ Goal: reproduce the pipeline and experiment design from the paper
 - [x] Export per-window actual vs predicted CSV
 - [x] Align dataset instruction input with tokenizer-cleaned representation
 
+## Current Dataset Status
+
+- [x] Confirm `unseenDBpool` contains a complete `3 x 3 x 3` cache-configuration grid for `matmult`
+- [x] Confirm `unseenDBpool` has one `.txt` metadata file per `.db` file
+- [ ] Preprocess all DBs in `db/unseenDBpool` to add `preprocessed_instruction`
+- [ ] Generate a fresh `runs.json` from `db/unseenDBpool`
+- [ ] Decide the temporary split policy to use with `unseenDBpool` during pipeline development
+- [ ] Re-run tokenizer / training / evaluation on `unseenDBpool`
+- [ ] Record baseline metrics for the `unseenDBpool` experiment
+- [ ] Defer `seenDBpool` cleanup until those DBs are regenerated or clarified
+- [ ] Revisit `seenDBpool` later: handle duplicate metadata-to-DB mappings and empty DBs
+
 ## Must Do For Paper Reproduction
 
 - [ ] Generate or collect a richer dataset with many runs across cache configurations

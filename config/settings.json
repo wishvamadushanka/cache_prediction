@@ -13,15 +13,17 @@
     "dropout": 0.05
   },
   "train": {
-    "split": "train",
+    "split": "seen",
     "sequence_length": 200,
     "max_token_length": 15,
     "batch_size": 60,
     "epochs": 10,
-    "learning_rate": 0.001
+    "learning_rate": 0.001,
+    "val_ratio": 0.1,
+    "split_seed": 42
   },
   "val": {
-    "split": "val",
+    "split": "seen",
     "sequence_length": 200,
     "max_token_length": 15,
     "batch_size": 60

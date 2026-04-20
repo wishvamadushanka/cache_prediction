@@ -1,5 +1,5 @@
 import torch
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, Subset
 from transformers import PreTrainedTokenizerFast
 
 from config.run_manifest import load_run_specs
@@ -26,24 +26,46 @@ val_settings = settings["val"]
 
 TOKENIZER_PATH = paths["tokenizer_path"]
 tokenizer = PreTrainedTokenizerFast.from_pretrained(TOKENIZER_PATH)
-train_run_specs = load_run_specs(RUN_CONFIG_PATH, split=train_settings["split"])
-val_run_specs = load_run_specs(RUN_CONFIG_PATH, split=val_settings["split"])
+seen_run_specs = load_run_specs(RUN_CONFIG_PATH, split=train_settings["split"])
 
 # -----------------------
 # Dataset & Loader
 # -----------------------
-train_dataset = CacheTraceDataset(
-    runs=train_run_specs,
+seen_dataset = CacheTraceDataset(
+    runs=seen_run_specs,
     tokenizer=tokenizer,
     sequence_length=train_settings["sequence_length"],
     max_token_length=train_settings["max_token_length"],
 )
-val_dataset = CacheTraceDataset(
-    runs=val_run_specs,
-    tokenizer=tokenizer,
-    sequence_length=val_settings["sequence_length"],
-    max_token_length=val_settings["max_token_length"],
-)
+if train_settings["sequence_length"] != val_settings["sequence_length"]:
+    raise ValueError("Train and val sequence lengths must match for seen-pool splitting.")
+if train_settings["max_token_length"] != val_settings["max_token_length"]:
+    raise ValueError("Train and val max token lengths must match for seen-pool splitting.")
+
+val_ratio = float(train_settings.get("val_ratio", 0.1))
+split_seed = int(train_settings.get("split_seed", 42))
+
+if not 0.0 < val_ratio < 1.0:
+    raise ValueError(f"val_ratio must be between 0 and 1, got {val_ratio}")
+
+total_seen_windows = len(seen_dataset)
+if total_seen_windows < 2:
+    raise ValueError(
+        "Seen dataset must contain at least 2 windows to create train/val splits."
+    )
+
+val_window_count = max(1, int(round(total_seen_windows * val_ratio)))
+if val_window_count >= total_seen_windows:
+    val_window_count = total_seen_windows - 1
+train_window_count = total_seen_windows - val_window_count
+
+generator = torch.Generator().manual_seed(split_seed)
+permutation = torch.randperm(total_seen_windows, generator=generator).tolist()
+train_indices = permutation[:train_window_count]
+val_indices = permutation[train_window_count:]
+
+train_dataset = Subset(seen_dataset, train_indices)
+val_dataset = Subset(seen_dataset, val_indices)
 
 # print("Dataset length:", len(dataset))
 # print("Dataset :", dataset)
@@ -57,7 +79,7 @@ val_loader = DataLoader(
 )
 
 print(
-    f"Loaded {len(train_run_specs)} train runs and {len(val_run_specs)} val runs | "
+    f"Loaded {len(seen_run_specs)} seen runs for train/val splitting | "
     f"{len(train_dataset)} train windows / {len(val_dataset)} val windows | "
     f"{len(train_loader)} train batches / {len(val_loader)} val batches"
 )
@@ -131,5 +153,4 @@ for epoch in range(train_settings["epochs"]):
         torch.save(model.state_dict(), paths["model_path"])
         print(f"Saved new best model with val loss {best_val_loss:.4f}")
 
-train_dataset.close()
-val_dataset.close()
+seen_dataset.close()
