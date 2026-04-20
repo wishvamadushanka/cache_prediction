@@ -7,4 +7,6 @@ venv/
 *.pt
 *.pth
 
+artifacts/
+
 .DS_Store
