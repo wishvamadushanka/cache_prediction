@@ -25,17 +25,25 @@ def parse_size_to_bytes(size_text):
     return int(size_text)
 
 
-def infer_split(index, total):
-    if total == 1:
-        return "train"
-    if index == total - 1:
-        return "test"
-    if index == total - 2:
-        return "val"
-    return "train"
+POOL_SPLITS = {
+    "seendbpool": "seen",
+    "seendbs": "seen",
+    "unseendbpool": "test",
+    "unseendbs": "test",
+}
 
 
-def discover_runs(db_dir, default_max_rows=None, default_cores=1):
+def infer_split_from_directory(db_dir: Path):
+    pool_name = db_dir.name.lower()
+    if pool_name in POOL_SPLITS:
+        return POOL_SPLITS[pool_name]
+    raise ValueError(
+        f"Cannot infer split from directory name '{db_dir.name}'. "
+        "Expected a seen/unseen DB pool directory."
+    )
+
+
+def discover_runs_in_directory(db_dir, split, default_max_rows=None, default_cores=1):
     discovered = []
 
     txt_files = sorted(db_dir.glob("*.txt"))
@@ -65,7 +73,7 @@ def discover_runs(db_dir, default_max_rows=None, default_cores=1):
                 "name": f"{program}_{param}_{db_path.stem}",
                 "db_path": os.path.relpath(db_path, PIPELINE_ROOT),
                 "program": program,
-                "split": "train",
+                "split": split,
                 "l1d_size": parse_size_to_bytes(l1d_text),
                 "l1i_size": parse_size_to_bytes(l1i_text),
                 "ll_size": parse_size_to_bytes(ll_text),
@@ -74,30 +82,54 @@ def discover_runs(db_dir, default_max_rows=None, default_cores=1):
             }
         )
 
+    return discovered
+
+
+def discover_runs(db_root, default_max_rows=None, default_cores=1):
+    discovered = []
+
+    candidate_dirs = []
+    if any(child.is_dir() for child in db_root.iterdir()):
+        candidate_dirs = sorted(path for path in db_root.iterdir() if path.is_dir())
+    else:
+        candidate_dirs = [db_root]
+
+    for db_dir in candidate_dirs:
+        split = infer_split_from_directory(db_dir)
+        discovered.extend(
+            discover_runs_in_directory(
+                db_dir=db_dir,
+                split=split,
+                default_max_rows=default_max_rows,
+                default_cores=default_cores,
+            )
+        )
+
     discovered.sort(
         key=lambda row: (
+            row["split"],
             row["l1d_size"],
             row["l1i_size"],
             row["ll_size"],
             row["name"],
         )
     )
-
-    total = len(discovered)
-    for idx, row in enumerate(discovered):
-        row["split"] = infer_split(idx, total)
-
     return discovered
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Generate runs.json from DB metadata files under the db directory."
+        description=(
+            "Generate runs.json from seen/unseen DB metadata files under the db directory."
+        )
     )
     parser.add_argument(
         "--db-dir",
         default=str(DEFAULT_DB_DIR),
-        help="Directory containing cache_stats DBs and companion .txt metadata files.",
+        help=(
+            "DB root directory. Expected to contain seen/unseen pool subdirectories, "
+            "or a single seen/unseen pool directory."
+        ),
     )
     parser.add_argument(
         "--output",
@@ -122,7 +154,7 @@ def main():
     output_path = Path(args.output).expanduser().resolve()
 
     runs = discover_runs(
-        db_dir=db_dir,
+        db_root=db_dir,
         default_max_rows=args.max_rows,
         default_cores=args.cores,
     )
