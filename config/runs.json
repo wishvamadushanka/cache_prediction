@@ -7,8 +7,7 @@
     "l1d_size": 512,
     "l1i_size": 512,
     "ll_size": 1024,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691286",
@@ -18,8 +17,7 @@
     "l1d_size": 512,
     "l1i_size": 512,
     "ll_size": 8192,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691287",
@@ -29,8 +27,7 @@
     "l1d_size": 512,
     "l1i_size": 512,
     "ll_size": 32768,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691289",
@@ -40,8 +37,7 @@
     "l1d_size": 512,
     "l1i_size": 8192,
     "ll_size": 1024,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691290",
@@ -51,8 +47,7 @@
     "l1d_size": 512,
     "l1i_size": 8192,
     "ll_size": 8192,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691292",
@@ -62,8 +57,7 @@
     "l1d_size": 512,
     "l1i_size": 8192,
     "ll_size": 32768,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691294",
@@ -73,8 +67,7 @@
     "l1d_size": 512,
     "l1i_size": 32768,
     "ll_size": 1024,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691295",
@@ -84,8 +77,7 @@
     "l1d_size": 512,
     "l1i_size": 32768,
     "ll_size": 8192,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691297",
@@ -95,8 +87,7 @@
     "l1d_size": 512,
     "l1i_size": 32768,
     "ll_size": 32768,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691299",
@@ -106,8 +97,7 @@
     "l1d_size": 8192,
     "l1i_size": 512,
     "ll_size": 1024,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691301",
@@ -117,8 +107,7 @@
     "l1d_size": 8192,
     "l1i_size": 512,
     "ll_size": 8192,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691302",
@@ -128,8 +117,7 @@
     "l1d_size": 8192,
     "l1i_size": 512,
     "ll_size": 32768,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691304",
@@ -139,8 +127,7 @@
     "l1d_size": 8192,
     "l1i_size": 8192,
     "ll_size": 1024,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691306",
@@ -150,8 +137,7 @@
     "l1d_size": 8192,
     "l1i_size": 8192,
     "ll_size": 8192,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691307",
@@ -161,8 +147,7 @@
     "l1d_size": 8192,
     "l1i_size": 8192,
     "ll_size": 32768,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691309",
@@ -172,8 +157,7 @@
     "l1d_size": 8192,
     "l1i_size": 32768,
     "ll_size": 1024,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691311",
@@ -183,8 +167,7 @@
     "l1d_size": 8192,
     "l1i_size": 32768,
     "ll_size": 8192,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691312",
@@ -194,8 +177,7 @@
     "l1d_size": 8192,
     "l1i_size": 32768,
     "ll_size": 32768,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691314",
@@ -205,8 +187,7 @@
     "l1d_size": 32768,
     "l1i_size": 512,
     "ll_size": 1024,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691316",
@@ -216,8 +197,7 @@
     "l1d_size": 32768,
     "l1i_size": 512,
     "ll_size": 8192,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691317",
@@ -227,8 +207,7 @@
     "l1d_size": 32768,
     "l1i_size": 512,
     "ll_size": 32768,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691319",
@@ -238,8 +217,7 @@
     "l1d_size": 32768,
     "l1i_size": 8192,
     "ll_size": 1024,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691321",
@@ -249,8 +227,7 @@
     "l1d_size": 32768,
     "l1i_size": 8192,
     "ll_size": 8192,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691322",
@@ -260,8 +237,7 @@
     "l1d_size": 32768,
     "l1i_size": 8192,
     "ll_size": 32768,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691324",
@@ -271,8 +247,7 @@
     "l1d_size": 32768,
     "l1i_size": 32768,
     "ll_size": 1024,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691326",
@@ -282,8 +257,7 @@
     "l1d_size": 32768,
     "l1i_size": 32768,
     "ll_size": 8192,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776691328",
@@ -293,8 +267,7 @@
     "l1d_size": 32768,
     "l1i_size": 32768,
     "ll_size": 32768,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657722",
@@ -304,8 +277,7 @@
     "l1d_size": 1024,
     "l1i_size": 1024,
     "ll_size": 2048,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657723",
@@ -315,8 +287,7 @@
     "l1d_size": 1024,
     "l1i_size": 1024,
     "ll_size": 4096,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657725",
@@ -326,8 +297,7 @@
     "l1d_size": 1024,
     "l1i_size": 1024,
     "ll_size": 16384,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657726",
@@ -337,8 +307,7 @@
     "l1d_size": 1024,
     "l1i_size": 2048,
     "ll_size": 2048,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657727",
@@ -348,8 +317,7 @@
     "l1d_size": 1024,
     "l1i_size": 2048,
     "ll_size": 4096,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657729",
@@ -359,8 +327,7 @@
     "l1d_size": 1024,
     "l1i_size": 2048,
     "ll_size": 16384,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657730",
@@ -370,8 +337,7 @@
     "l1d_size": 1024,
     "l1i_size": 65536,
     "ll_size": 2048,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657731",
@@ -381,8 +347,7 @@
     "l1d_size": 1024,
     "l1i_size": 65536,
     "ll_size": 4096,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657733",
@@ -392,8 +357,7 @@
     "l1d_size": 1024,
     "l1i_size": 65536,
     "ll_size": 16384,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657734",
@@ -403,8 +367,7 @@
     "l1d_size": 2048,
     "l1i_size": 1024,
     "ll_size": 2048,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657736",
@@ -414,8 +377,7 @@
     "l1d_size": 2048,
     "l1i_size": 1024,
     "ll_size": 4096,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657737",
@@ -425,8 +387,7 @@
     "l1d_size": 2048,
     "l1i_size": 1024,
     "ll_size": 16384,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657738",
@@ -436,8 +397,7 @@
     "l1d_size": 2048,
     "l1i_size": 2048,
     "ll_size": 2048,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657739",
@@ -447,8 +407,7 @@
     "l1d_size": 2048,
     "l1i_size": 2048,
     "ll_size": 4096,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657741",
@@ -458,8 +417,7 @@
     "l1d_size": 2048,
     "l1i_size": 2048,
     "ll_size": 16384,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657742",
@@ -469,8 +427,7 @@
     "l1d_size": 2048,
     "l1i_size": 65536,
     "ll_size": 2048,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657743",
@@ -480,8 +437,7 @@
     "l1d_size": 2048,
     "l1i_size": 65536,
     "ll_size": 4096,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657745",
@@ -491,8 +447,7 @@
     "l1d_size": 2048,
     "l1i_size": 65536,
     "ll_size": 16384,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657747",
@@ -502,8 +457,7 @@
     "l1d_size": 65536,
     "l1i_size": 1024,
     "ll_size": 2048,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657748",
@@ -513,8 +467,7 @@
     "l1d_size": 65536,
     "l1i_size": 1024,
     "ll_size": 4096,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657750",
@@ -524,8 +477,7 @@
     "l1d_size": 65536,
     "l1i_size": 1024,
     "ll_size": 16384,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657751",
@@ -535,8 +487,7 @@
     "l1d_size": 65536,
     "l1i_size": 2048,
     "ll_size": 2048,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657753",
@@ -546,8 +497,7 @@
     "l1d_size": 65536,
     "l1i_size": 2048,
     "ll_size": 4096,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657754",
@@ -557,8 +507,7 @@
     "l1d_size": 65536,
     "l1i_size": 2048,
     "ll_size": 16384,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657756",
@@ -568,8 +517,7 @@
     "l1d_size": 65536,
     "l1i_size": 65536,
     "ll_size": 2048,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657758",
@@ -579,8 +527,7 @@
     "l1d_size": 65536,
     "l1i_size": 65536,
     "ll_size": 4096,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   },
   {
     "name": "matmult_10_cache_stats_1776657759",
@@ -590,7 +537,6 @@
     "l1d_size": 65536,
     "l1i_size": 65536,
     "ll_size": 16384,
-    "cores": 1,
-    "max_rows": 2000
+    "cores": 1
   }
 ]

@@ -3,7 +3,7 @@ import json
 from dataset.cache_dataset import CacheRunConfig
 
 
-def load_run_specs(config_path, split=None):
+def load_run_specs(config_path, split=None, max_rows_override=None):
     with open(config_path, "r", encoding="utf-8") as f:
         manifest = json.load(f)
 
@@ -28,7 +28,7 @@ def load_run_specs(config_path, split=None):
                 fallback_instruction_column=entry.get(
                     "fallback_instruction_column", "disassembly_string"
                 ),
-                max_rows=entry.get("max_rows"),
+                max_rows=max_rows_override,
             )
         )
 

@@ -26,7 +26,11 @@ val_settings = settings["val"]
 
 TOKENIZER_PATH = paths["tokenizer_path"]
 tokenizer = PreTrainedTokenizerFast.from_pretrained(TOKENIZER_PATH)
-seen_run_specs = load_run_specs(RUN_CONFIG_PATH, split=train_settings["split"])
+seen_run_specs = load_run_specs(
+    RUN_CONFIG_PATH,
+    split=train_settings["split"],
+    max_rows_override=train_settings.get("max_rows_override"),
+)
 
 # -----------------------
 # Dataset & Loader

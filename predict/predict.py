@@ -25,7 +25,11 @@ device = settings["device"]
 # Load tokenizer
 # -----------------------
 tokenizer = PreTrainedTokenizerFast.from_pretrained(TOKENIZER_PATH)
-run_specs = load_run_specs(RUN_CONFIG_PATH, split=test_settings["split"])
+run_specs = load_run_specs(
+    RUN_CONFIG_PATH,
+    split=test_settings["split"],
+    max_rows_override=test_settings.get("max_rows_override"),
+)
 
 # -----------------------
 # Create dataset (for inference you can set sequence_length=SEQ_LEN)

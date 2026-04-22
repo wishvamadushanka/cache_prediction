@@ -112,7 +112,11 @@ def main():
     device = settings["device"]
 
     tokenizer = PreTrainedTokenizerFast.from_pretrained(tokenizer_path)
-    run_specs = load_run_specs(RUN_CONFIG_PATH, split=eval_split)
+    run_specs = load_run_specs(
+        RUN_CONFIG_PATH,
+        split=eval_split,
+        max_rows_override=test_settings.get("max_rows_override"),
+    )
 
     dataset = CacheTraceDataset(
         runs=run_specs,

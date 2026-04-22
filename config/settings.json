@@ -29,6 +29,7 @@
     "batch_size": 60,
     "epochs": 10,
     "learning_rate": 0.001,
+    "max_rows_override": null,
     "val_ratio": 0.1,
     "split_seed": 42
   },
@@ -42,6 +43,7 @@
     "split": "test",
     "sequence_length": 200,
     "max_token_length": 15,
-    "batch_size": 32
+    "batch_size": 32,
+    "max_rows_override": null
   }
 }
