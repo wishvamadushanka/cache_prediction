@@ -19,26 +19,64 @@ Goal: reproduce the pipeline and experiment design from the paper
 - [x] Add test evaluation with `MSE`, `RMSE`, `R2`, `REP`
 - [x] Export per-window actual vs predicted CSV
 - [x] Align dataset instruction input with tokenizer-cleaned representation
+- [x] Split train/val from a shared `seen` DB pool at the window level
+- [x] Use `unseen` DB pool as test-only evaluation data
+- [x] Generate manifest splits from `seenDBpool` / `unseenDBpool`
 
 ## Current Dataset Status
 
 - [x] Confirm `unseenDBpool` contains a complete `3 x 3 x 3` cache-configuration grid for `matmult`
 - [x] Confirm `unseenDBpool` has one `.txt` metadata file per `.db` file
-- [ ] Preprocess all DBs in `db/unseenDBpool` to add `preprocessed_instruction`
-- [ ] Generate a fresh `runs.json` from `db/unseenDBpool`
-- [ ] Decide the temporary split policy to use with `unseenDBpool` during pipeline development
-- [ ] Re-run tokenizer / training / evaluation on `unseenDBpool`
-- [ ] Record baseline metrics for the `unseenDBpool` experiment
-- [ ] Defer `seenDBpool` cleanup until those DBs are regenerated or clarified
-- [ ] Revisit `seenDBpool` later: handle duplicate metadata-to-DB mappings and empty DBs
+- [x] Confirm `seenDBpool` contains a complete `3 x 3 x 3` cache-configuration grid for `matmult`
+- [x] Confirm `seenDBpool` has one `.txt` metadata file per `.db` file
+- [x] Preprocess all DBs in `db/seenDBpool` to add `preprocessed_instruction`
+- [x] Preprocess all DBs in `db/unseenDBpool` to add `preprocessed_instruction`
+- [x] Generate a combined `runs.json` from `db/seenDBpool` and `db/unseenDBpool`
+- [x] Use `seenDBpool` for train/val and `unseenDBpool` for test
+- [x] Train and evaluate on the matrix-multiplication seen/unseen dataset split
+- [x] Record a baseline unseen-pool evaluation for the matrix-multiplication experiment
+
+## Alignment Snapshot
+
+### Already Aligned
+
+- [x] Use SQLite trace DBs as the model input source
+- [x] Use the paper-style numeric feature family, including cache-size metadata
+- [x] Use non-overlapping subsequences
+- [x] Use subsequence-level regression targets for `L1D`, `L1I`, and `LL`
+- [x] Use `sequence_length = 200`
+- [x] Use tokenizer max length `15`
+- [x] Use an embedding + LSTM + linear output model
+- [x] Train with `MSE`
+- [x] Use seen configurations for train/val and unseen configurations for test
+- [x] Report `MSE`, `RMSE`, `R2`, and `REP`
+- [x] Export per-window predictions for later analysis
+
+### Needs Code Change
+
+- [ ] Train the tokenizer in a paper-disciplined way using the seen pool only
+- [ ] Fix tokenizer corpus statistics bug in `tokernizer/train_assembly_tokenizer.py`
+- [ ] Move tokenizer training into the same config-driven workflow as train/evaluate
+- [ ] Add plots for per-window actual vs predicted cache misses
+- [ ] Add plots similar to the paper’s execution trace figures
+- [ ] Add benchmark/run summary tables
+- [ ] Add heatmap-style summaries if we later have enough cache/core combinations
+- [ ] Add a report summarizing results for each run and cache level
+- [ ] Add Optuna-based hyperparameter optimization
+- [ ] Add reduced-data hyperparameter search workflow
+- [ ] Add time-limited hyperparameter trials similar to the paper
+
+### Needs Experiment / Data Change
+
+- [ ] Use program families closer to the paper benchmarks or equivalent target workloads
+- [ ] Add multiple core-count settings where applicable
+- [ ] Confirm the trace-generation process matches the paper’s intended feature semantics
+- [ ] Confirm all feature columns exactly match the final paper input design
+- [ ] Re-run the full workflow on the final paper-style benchmark family
+- [ ] Compare the final results against the paper’s reported behavior
 
 ## Must Do For Paper Reproduction
 
-- [ ] Generate or collect a richer dataset with many runs across cache configurations
-- [ ] Include multiple cache size combinations for `L1D`, `L1I`, and `LL`
-- [ ] Include multiple core-count settings where applicable
-- [ ] Build training data from seen cache configurations
-- [ ] Build test data from unseen cache configurations
 - [ ] Use program families closer to the paper benchmarks or equivalent target workloads
 - [ ] Verify the trace-generation process matches the paper’s intended feature semantics
 - [ ] Confirm all feature columns exactly match the final paper input design
@@ -70,9 +108,11 @@ Goal: reproduce the pipeline and experiment design from the paper
 
 ## Data / Experiment Checks
 
-- [ ] Confirm the real cache metadata for every final run
+- [x] Confirm the real cache metadata for the current matrix-multiplication runs
+- [x] Confirm the train / val / test split policy for the current seen/unseen experiment
+- [ ] Confirm the real cache metadata for every final paper-style run
 - [ ] Confirm the real core-count metadata for every final run
-- [ ] Confirm train / val / test split policy for the final experiment
+- [ ] Confirm train / val / test split policy for the final paper-style experiment
 - [ ] Remove sanity-run limitations when moving to final experiments
 - [ ] Re-run training and evaluation on the full intended datasets
 - [ ] Compare resulting metrics and behavior against the paper
