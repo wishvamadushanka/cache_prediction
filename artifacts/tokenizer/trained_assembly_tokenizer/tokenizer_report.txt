@@ -1,0 +1,14 @@
+============================================================
+ASSEMBLY TOKENIZER TRAINING REPORT
+============================================================
+
+Training Date: 2026-04-22 23:50:11
+Database Files: 27
+Corpus File: /home/vm/Desktop/ML/cache_prediction/artifacts/tokenizer/assembly_corpus.txt
+Vocabulary Size: 5000
+Training Time: 12.69 seconds
+Output Directory: /home/vm/Desktop/ML/cache_prediction/artifacts/tokenizer/trained_assembly_tokenizer
+Tokenizer JSON: /home/vm/Desktop/ML/cache_prediction/artifacts/tokenizer/trained_assembly_tokenizer/assembly_tokenizer.json
+Fast Tokenizer: /home/vm/Desktop/ML/cache_prediction/artifacts/tokenizer/trained_assembly_tokenizer/fast_tokenizer
+
+============================================================

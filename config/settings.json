@@ -1,10 +1,20 @@
 {
   "paths": {
-    "tokenizer_path": "../DBs_Randika/trained_assembly_tokenizer/fast_tokenizer",
+    "tokenizer_path": "./artifacts/tokenizer/trained_assembly_tokenizer/fast_tokenizer",
     "model_path": "./combined_lstm.pt",
     "evaluation_output_dir": "./artifacts/evaluation"
   },
   "device": "cpu",
+  "tokenizer": {
+    "source_split": "seen",
+    "db_dir": "../db/seenDBpool",
+    "output_dir": "./artifacts/tokenizer/trained_assembly_tokenizer",
+    "corpus_file": "./artifacts/tokenizer/assembly_corpus.txt",
+    "vocab_size": 5000,
+    "min_frequency": 2,
+    "max_instructions": null,
+    "max_token_length": 15
+  },
   "model": {
     "token_embedding_dim": 15,
     "hidden_dim": 330,

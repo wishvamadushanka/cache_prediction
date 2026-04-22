@@ -1,0 +1,161 @@
+2026-04-22 23:45:24,574 - INFO - Searching for SQLite files in: /home/vm/Desktop/ML/db/seenDBpool
+2026-04-22 23:45:24,575 - INFO - Found 27 database files
+2026-04-22 23:45:24,575 - INFO -   1. /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691284.db
+2026-04-22 23:45:24,575 - INFO -   2. /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691286.db
+2026-04-22 23:45:24,575 - INFO -   3. /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691287.db
+2026-04-22 23:45:24,575 - INFO -   4. /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691289.db
+2026-04-22 23:45:24,575 - INFO -   5. /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691290.db
+2026-04-22 23:45:24,575 - INFO -   6. /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691292.db
+2026-04-22 23:45:24,575 - INFO -   7. /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691294.db
+2026-04-22 23:45:24,575 - INFO -   8. /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691295.db
+2026-04-22 23:45:24,575 - INFO -   9. /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691297.db
+2026-04-22 23:45:24,575 - INFO -   10. /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691299.db
+2026-04-22 23:45:24,575 - INFO -   ... and 17 more
+2026-04-22 23:45:24,575 - INFO - ============================================================
+2026-04-22 23:45:24,575 - INFO - Building Assembly Instruction Corpus
+2026-04-22 23:45:24,575 - INFO - ============================================================
+2026-04-22 23:45:24,576 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691284.db
+2026-04-22 23:45:35,236 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691284.db: 209,132 instructions (7,563 unique)
+2026-04-22 23:45:35,237 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691286.db
+2026-04-22 23:45:45,269 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691286.db: 209,132 instructions (7,563 unique)
+2026-04-22 23:45:45,275 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691287.db
+2026-04-22 23:45:55,261 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691287.db: 209,170 instructions (7,568 unique)
+2026-04-22 23:45:55,266 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691289.db
+2026-04-22 23:46:05,260 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691289.db: 209,132 instructions (7,563 unique)
+2026-04-22 23:46:05,266 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691290.db
+2026-04-22 23:46:15,253 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691290.db: 209,132 instructions (7,563 unique)
+2026-04-22 23:46:15,258 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691292.db
+2026-04-22 23:46:25,470 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691292.db: 209,132 instructions (7,563 unique)
+2026-04-22 23:46:25,475 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691294.db
+2026-04-22 23:46:35,486 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691294.db: 209,170 instructions (7,568 unique)
+2026-04-22 23:46:35,487 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691295.db
+2026-04-22 23:46:45,456 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691295.db: 209,170 instructions (7,568 unique)
+2026-04-22 23:46:45,461 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691297.db
+2026-04-22 23:46:55,552 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691297.db: 209,132 instructions (7,563 unique)
+2026-04-22 23:46:55,553 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691299.db
+2026-04-22 23:47:05,545 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691299.db: 209,132 instructions (7,563 unique)
+2026-04-22 23:47:05,546 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691301.db
+2026-04-22 23:47:15,814 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691301.db: 209,160 instructions (7,575 unique)
+2026-04-22 23:47:15,819 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691302.db
+2026-04-22 23:47:26,144 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691302.db: 209,134 instructions (7,563 unique)
+2026-04-22 23:47:26,149 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691304.db
+2026-04-22 23:47:36,146 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691304.db: 209,130 instructions (7,567 unique)
+2026-04-22 23:47:36,153 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691306.db
+2026-04-22 23:47:46,145 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691306.db: 209,170 instructions (7,568 unique)
+2026-04-22 23:47:46,150 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691307.db
+2026-04-22 23:47:56,165 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691307.db: 209,132 instructions (7,563 unique)
+2026-04-22 23:47:56,171 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691309.db
+2026-04-22 23:48:06,523 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691309.db: 209,170 instructions (7,568 unique)
+2026-04-22 23:48:06,528 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691311.db
+2026-04-22 23:48:16,558 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691311.db: 209,170 instructions (7,568 unique)
+2026-04-22 23:48:16,563 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691312.db
+2026-04-22 23:48:26,652 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691312.db: 209,170 instructions (7,568 unique)
+2026-04-22 23:48:26,653 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691314.db
+2026-04-22 23:48:36,666 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691314.db: 209,132 instructions (7,563 unique)
+2026-04-22 23:48:36,672 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691316.db
+2026-04-22 23:48:47,061 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691316.db: 209,170 instructions (7,568 unique)
+2026-04-22 23:48:47,067 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691317.db
+2026-04-22 23:48:57,485 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691317.db: 209,170 instructions (7,568 unique)
+2026-04-22 23:48:57,491 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691319.db
+2026-04-22 23:49:07,523 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691319.db: 209,170 instructions (7,568 unique)
+2026-04-22 23:49:07,529 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691321.db
+2026-04-22 23:49:17,564 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691321.db: 209,170 instructions (7,568 unique)
+2026-04-22 23:49:17,570 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691322.db
+2026-04-22 23:49:27,681 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691322.db: 209,088 instructions (7,565 unique)
+2026-04-22 23:49:27,686 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691324.db
+2026-04-22 23:49:37,966 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691324.db: 209,133 instructions (7,563 unique)
+2026-04-22 23:49:37,971 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691326.db
+2026-04-22 23:49:48,425 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691326.db: 209,134 instructions (7,563 unique)
+2026-04-22 23:49:48,430 - INFO - Processing database: /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691328.db
+2026-04-22 23:49:58,930 - INFO -   ✓ /home/vm/Desktop/ML/db/seenDBpool/cache_stats_1776691328.db: 209,170 instructions (7,568 unique)
+2026-04-22 23:49:58,930 - INFO - 
+============================================================
+2026-04-22 23:49:58,931 - INFO - CORPUS BUILDING COMPLETE
+2026-04-22 23:49:58,931 - INFO - ============================================================
+2026-04-22 23:49:58,931 - INFO - Total database files: 27
+2026-04-22 23:49:58,931 - INFO - Successfully processed: 27
+2026-04-22 23:49:58,931 - INFO - Failed files: 0
+2026-04-22 23:49:58,931 - INFO - Total instructions extracted: 5,647,007
+2026-04-22 23:49:58,931 - INFO - Unique instructions: 83,029
+2026-04-22 23:49:58,931 - INFO - Corpus file: /home/vm/Desktop/ML/cache_prediction/artifacts/tokenizer/assembly_corpus.txt
+2026-04-22 23:49:58,931 - INFO - Corpus size: 174.61 MB
+2026-04-22 23:49:58,931 - INFO - ============================================================
+2026-04-22 23:49:58,943 - INFO - Corpus statistics saved to: /home/vm/Desktop/ML/cache_prediction/artifacts/tokenizer/trained_assembly_tokenizer/corpus_stats.json
+2026-04-22 23:49:58,943 - INFO - ============================================================
+2026-04-22 23:49:58,943 - INFO - Training Byte-Level BPE Tokenizer
+2026-04-22 23:49:58,943 - INFO - ============================================================
+2026-04-22 23:49:58,943 - INFO - Corpus file: /home/vm/Desktop/ML/cache_prediction/artifacts/tokenizer/assembly_corpus.txt
+2026-04-22 23:49:58,943 - INFO - Vocabulary size: 5000
+2026-04-22 23:49:58,943 - INFO - Special tokens: ['[PAD]', '[UNK]', '[CLS]', '[SEP]', '[MASK]']
+2026-04-22 23:49:58,943 - INFO - Corpus size: 174.61 MB
+2026-04-22 23:49:58,943 - INFO - Initializing Byte-Level BPE tokenizer...
+2026-04-22 23:49:58,950 - INFO - Training tokenizer on assembly corpus...
+2026-04-22 23:50:11,617 - INFO - Tokenizer saved to: /home/vm/Desktop/ML/cache_prediction/artifacts/tokenizer/trained_assembly_tokenizer/assembly_tokenizer.json
+2026-04-22 23:50:11,637 - INFO - Fast tokenizer saved to: /home/vm/Desktop/ML/cache_prediction/artifacts/tokenizer/trained_assembly_tokenizer/fast_tokenizer
+2026-04-22 23:50:11,639 - INFO - 
+Testing tokenizer on sample instructions...
+2026-04-22 23:50:11,639 - INFO - 
+Test 1: call $0x00007b235c6a3030 %rsp -> %rsp 0xfffffff8(%...
+2026-04-22 23:50:11,646 - INFO -   Tokens: ['call', '$', '0x00007b', '23', '5c', '6a30', '30', '%', 'rsp', '->', '%', 'rsp', '0xfffffff8', '(%', 'rsp', ')[', '8byte', ']']
+2026-04-22 23:50:11,647 - INFO -   Token IDs: [2, 516, 8, 342, 381, 448, 4042, 433, 9, 282, 264, 9, 282, 328, 3]
+2026-04-22 23:50:11,647 - INFO -   Attention mask: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+2026-04-22 23:50:11,647 - INFO -   Token count: 18
+2026-04-22 23:50:11,651 - INFO -   Decoded: call$0x00007b235c6a3030%rsp->%rsp0xfffffff8...
+2026-04-22 23:50:11,651 - INFO - 
+Test 2: nop %edx...
+2026-04-22 23:50:11,652 - INFO -   Tokens: ['nop', '%', 'edx']
+2026-04-22 23:50:11,652 - INFO -   Token IDs: [2, 426, 9, 321, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+2026-04-22 23:50:11,652 - INFO -   Attention mask: [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+2026-04-22 23:50:11,652 - INFO -   Token count: 3
+2026-04-22 23:50:11,652 - INFO -   Decoded: nop%edx...
+2026-04-22 23:50:11,652 - INFO - 
+Test 3: push %r14 %rsp -> %rsp 0xfffffff8(%rsp)[8byte]...
+2026-04-22 23:50:11,653 - INFO -   Tokens: ['push', '%', 'r14', '%', 'rsp', '->', '%', 'rsp', '0xfffffff8', '(%', 'rsp', ')[', '8byte', ']']
+2026-04-22 23:50:11,653 - INFO -   Token IDs: [2, 361, 9, 355, 9, 282, 264, 9, 282, 328, 271, 282, 272, 277, 3]
+2026-04-22 23:50:11,653 - INFO -   Attention mask: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+2026-04-22 23:50:11,653 - INFO -   Token count: 14
+2026-04-22 23:50:11,653 - INFO -   Decoded: push%r14%rsp->%rsp0xfffffff8(%rsp)[8byte...
+2026-04-22 23:50:11,653 - INFO - 
+Test 4: cmp %rax $0x00000000000000022...
+2026-04-22 23:50:11,653 - INFO -   Tokens: ['cmp', '%', 'rax', '$', '0x0000000000000002', '2']
+2026-04-22 23:50:11,653 - INFO -   Token IDs: [2, 296, 9, 268, 8, 843, 22, 3, 0, 0, 0, 0, 0, 0, 0]
+2026-04-22 23:50:11,653 - INFO -   Attention mask: [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0]
+2026-04-22 23:50:11,653 - INFO -   Token count: 6
+2026-04-22 23:50:11,654 - INFO -   Decoded: cmp%rax$0x00000000000000022...
+2026-04-22 23:50:11,654 - INFO - 
+Test 5: mov %rdi -> %rsi...
+2026-04-22 23:50:11,654 - INFO -   Tokens: ['mov', '%', 'rdi', '->', '%', 'rsi']
+2026-04-22 23:50:11,654 - INFO -   Token IDs: [2, 275, 9, 327, 264, 9, 334, 3, 0, 0, 0, 0, 0, 0, 0]
+2026-04-22 23:50:11,654 - INFO -   Attention mask: [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0]
+2026-04-22 23:50:11,654 - INFO -   Token count: 6
+2026-04-22 23:50:11,654 - INFO -   Decoded: mov%rdi->%rsi...
+2026-04-22 23:50:11,654 - INFO - 
+Test 6: sub %rax %rsi -> %rsi...
+2026-04-22 23:50:11,655 - INFO -   Tokens: ['sub', '%', 'rax', '%', 'rsi', '->', '%', 'rsi']
+2026-04-22 23:50:11,655 - INFO -   Token IDs: [2, 405, 9, 268, 9, 334, 264, 9, 334, 3, 0, 0, 0, 0, 0]
+2026-04-22 23:50:11,655 - INFO -   Attention mask: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0]
+2026-04-22 23:50:11,655 - INFO -   Token count: 8
+2026-04-22 23:50:11,655 - INFO -   Decoded: sub%rax%rsi->%rsi...
+2026-04-22 23:50:11,655 - INFO - 
+Test 7: and $0xdf <rel> 0x00007b235c6bce0e[1byte] -> <rel>...
+2026-04-22 23:50:11,656 - INFO -   Tokens: ['and', '$', '0x', 'df', '<', 'rel', '>', '0x00007b', '23', '5c', '6', 'bc', 'e0e', '[', '1byte', ']', '->', '<', 'rel', '>', '0x00007b', '23', '5c', '6', 'bc', 'e0e', '[', '1byte', ']']
+2026-04-22 23:50:11,656 - INFO -   Token IDs: [2, 368, 8, 265, 1745, 32, 386, 34, 342, 381, 448, 26, 461, 4301, 3]
+2026-04-22 23:50:11,656 - INFO -   Attention mask: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+2026-04-22 23:50:11,656 - INFO -   Token count: 29
+2026-04-22 23:50:11,656 - INFO -   Decoded: and$0xdf<rel>0x00007b235c6bce0e...
+2026-04-22 23:50:11,656 - INFO - 
+============================================================
+2026-04-22 23:50:11,656 - INFO - TOKENIZER TRAINING COMPLETE
+2026-04-22 23:50:11,656 - INFO - ============================================================
+2026-04-22 23:50:11,656 - INFO - Training time: 12.69 seconds
+2026-04-22 23:50:11,656 - INFO - Vocabulary size: 5000
+2026-04-22 23:50:11,656 - INFO - Special tokens: ['[UNK]', '[SEP]', '[PAD]', '[CLS]', '[MASK]']
+2026-04-22 23:50:11,656 - INFO - Tokenizer saved to: /home/vm/Desktop/ML/cache_prediction/artifacts/tokenizer/trained_assembly_tokenizer/assembly_tokenizer.json
+2026-04-22 23:50:11,656 - INFO - Fast tokenizer saved to: /home/vm/Desktop/ML/cache_prediction/artifacts/tokenizer/trained_assembly_tokenizer/fast_tokenizer
+2026-04-22 23:50:11,656 - INFO - ============================================================
+2026-04-22 23:50:11,657 - INFO - Training statistics saved to: /home/vm/Desktop/ML/cache_prediction/artifacts/tokenizer/trained_assembly_tokenizer/training_stats.json
+2026-04-22 23:50:11,657 - INFO - Summary report saved to: /home/vm/Desktop/ML/cache_prediction/artifacts/tokenizer/trained_assembly_tokenizer/tokenizer_report.txt
+2026-04-22 23:50:11,657 - INFO - 
+============================================================
+2026-04-22 23:50:11,657 - INFO - TOKENIZER TRAINING COMPLETE!
+2026-04-22 23:50:11,657 - INFO - ============================================================

@@ -50,13 +50,13 @@ Equivalent direct Python commands:
 Train the tokenizer from the shared config:
 
 ```bash
-python -m tokernizer.train_assembly_tokenizer
+python -m tokenizer.train_assembly_tokenizer
 ```
 
 Test the tokenizer:
 
 ```bash
-python -m tokernizer.test_tokenizer
+python -m tokenizer.test_tokenizer
 ```
 
 Train the model:

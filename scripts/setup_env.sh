@@ -41,5 +41,5 @@ echo "Environment setup complete."
 echo
 echo "Next steps:"
 echo "  source .venv/bin/activate"
-echo "  python -m tokernizer.test_tokenizer"
+echo "  python -m tokenizer.test_tokenizer"
 echo "  python -m train.train"

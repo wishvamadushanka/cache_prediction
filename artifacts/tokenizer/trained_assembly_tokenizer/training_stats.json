@@ -1,0 +1,20 @@
+{
+  "training_time_seconds": 12.694366455078125,
+  "vocab_size": 5000,
+  "tokenizer_path": "/home/vm/Desktop/ML/cache_prediction/artifacts/tokenizer/trained_assembly_tokenizer/assembly_tokenizer.json",
+  "fast_tokenizer_path": "/home/vm/Desktop/ML/cache_prediction/artifacts/tokenizer/trained_assembly_tokenizer/fast_tokenizer",
+  "config": {
+    "vocab_size": 5000,
+    "min_frequency": 2,
+    "special_tokens": [
+      "[PAD]",
+      "[UNK]",
+      "[CLS]",
+      "[SEP]",
+      "[MASK]"
+    ],
+    "max_token_length": 15,
+    "save_path": "/home/vm/Desktop/ML/cache_prediction/artifacts/tokenizer/trained_assembly_tokenizer",
+    "corpus_file": "/home/vm/Desktop/ML/cache_prediction/artifacts/tokenizer/assembly_corpus.txt"
+  }
+}

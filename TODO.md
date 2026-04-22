@@ -55,7 +55,7 @@ Goal: reproduce the pipeline and experiment design from the paper
 ### Needs Code Change
 
 - [ ] Train the tokenizer in a paper-disciplined way using the seen pool only
-- [ ] Fix tokenizer corpus statistics bug in `tokernizer/train_assembly_tokenizer.py`
+- [x] Fix tokenizer corpus statistics bug in [`tokenizer/train_assembly_tokenizer.py`](/home/vm/Desktop/ML/cache_prediction/tokenizer/train_assembly_tokenizer.py)
 - [ ] Move tokenizer training into the same config-driven workflow as train/evaluate
 - [ ] Add plots for per-window actual vs predicted cache misses
 - [ ] Add plots similar to the paper’s execution trace figures

@@ -12,6 +12,11 @@ from typing import List, Set, Tuple
 import logging
 import re
 
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PIPELINE_ROOT = PROJECT_ROOT / "cache_prediction"
+if str(PIPELINE_ROOT) not in sys.path:
+    sys.path.insert(0, str(PIPELINE_ROOT))
+
 # Tokenizer imports (HuggingFace tokenizers library)
 from tokenizers import Tokenizer, models, trainers, pre_tokenizers, processors, normalizers
 from tokenizers.models import BPE
@@ -23,6 +28,7 @@ from tokenizers import decoders
 
 # Transformers integration
 from transformers import PreTrainedTokenizerFast
+from config.settings_loader import load_settings
 
 # Setup logging
 logging.basicConfig(
@@ -34,6 +40,8 @@ logging.basicConfig(
     ]
 )
 logger = logging.getLogger(__name__)
+
+DEFAULT_SETTINGS_PATH = PIPELINE_ROOT / "config" / "settings.json"
 
 class AssemblyCorpusBuilder:
     
@@ -118,7 +126,7 @@ class AssemblyCorpusBuilder:
             logger.error(f"Error validating {db_path}: {str(e)}")
             return False
     
-    def _process_db_file(self, db_path: str, corpus_writer) -> Tuple[int, int]:
+    def _process_db_file(self, db_path: str, corpus_writer) -> Tuple[int, Set[str]]:
         """
         Process single SQLite database file and extract instructions
         
@@ -170,7 +178,7 @@ class AssemblyCorpusBuilder:
                         # Check if we've reached the limit
                         if self.max_instructions and instructions_processed >= self.max_instructions:
                             conn.close()
-                            return instructions_processed, len(unique_instructions)
+                            return instructions_processed, unique_instructions
                 
                 offset += chunk_size
                 
@@ -180,11 +188,11 @@ class AssemblyCorpusBuilder:
             
             conn.close()
             
-            return instructions_processed, len(unique_instructions)
+            return instructions_processed, unique_instructions
             
         except Exception as e:
             logger.error(f"Error processing {db_path}: {str(e)}")
-            return instructions_processed, len(unique_instructions)
+            return instructions_processed, unique_instructions
     
     def build_corpus(self) -> dict:
         """
@@ -221,13 +229,16 @@ class AssemblyCorpusBuilder:
                     continue
                 
                 # Process the file
-                processed, unique = self._process_db_file(db_path, f)
+                processed, unique_instructions = self._process_db_file(db_path, f)
                 total_instructions += processed
-                all_unique_instructions.update([f"{ins}\n" for ins in all_unique_instructions])
+                all_unique_instructions.update(unique_instructions)
                 
                 self.stats['processed_files'] += 1
                 
-                logger.info(f"  ✓ {db_path}: {processed:,} instructions ({unique:,} unique)")
+                logger.info(
+                    f"  ✓ {db_path}: {processed:,} instructions "
+                    f"({len(unique_instructions):,} unique)"
+                )
                 
                 # Check if we've reached the global limit
                 if self.max_instructions and total_instructions >= self.max_instructions:
@@ -511,18 +522,39 @@ def find_sqlite_files(directory: str, pattern: str = "*.db") -> List[str]:
     
     return sorted(db_files)
 
+
+def resolve_path(path_text: str) -> str:
+    path = Path(path_text).expanduser()
+    if not path.is_absolute():
+        path = (PIPELINE_ROOT / path).resolve()
+    return str(path)
+
+
+def load_tokenizer_settings(settings_path: str):
+    settings = load_settings(settings_path)
+    tokenizer_settings = settings.get("tokenizer")
+    if not tokenizer_settings:
+        raise ValueError(f"No 'tokenizer' section found in {settings_path}")
+    return settings, tokenizer_settings
+
 def main():
     """Main execution function"""
     parser = argparse.ArgumentParser(description="Train Byte-Level BPE Tokenizer on Assembly Instructions")
-    parser.add_argument("--db-dir", type=str, required=True,
+    parser.add_argument(
+        "--settings-path",
+        type=str,
+        default=str(DEFAULT_SETTINGS_PATH),
+        help="Path to settings.json containing the tokenizer configuration.",
+    )
+    parser.add_argument("--db-dir", type=str, default=None,
                        help="Directory containing SQLite database files")
-    parser.add_argument("--output-dir", type=str, default="trained_tokenizer",
+    parser.add_argument("--output-dir", type=str, default=None,
                        help="Output directory for tokenizer")
-    parser.add_argument("--vocab-size", type=int, default=5000,
+    parser.add_argument("--vocab-size", type=int, default=None,
                        help="Vocabulary size for tokenizer")
     parser.add_argument("--max-instructions", type=int, default=None,
                        help="Maximum number of instructions to process")
-    parser.add_argument("--corpus-file", type=str, default="assembly_corpus.txt",
+    parser.add_argument("--corpus-file", type=str, default=None,
                        help="Output corpus file path")
     parser.add_argument("--skip-corpus", action="store_true",
                        help="Skip corpus building (use existing corpus)")
@@ -530,16 +562,28 @@ def main():
                        help="Train tokenizer only (skip corpus building)")
     
     args = parser.parse_args()
+
+    _, tokenizer_settings = load_tokenizer_settings(resolve_path(args.settings_path))
+
+    db_dir = resolve_path(args.db_dir or tokenizer_settings["db_dir"])
+    output_dir = resolve_path(args.output_dir or tokenizer_settings["output_dir"])
+    vocab_size = args.vocab_size or tokenizer_settings["vocab_size"]
+    max_instructions = args.max_instructions
+    if max_instructions is None:
+        max_instructions = tokenizer_settings.get("max_instructions")
+    corpus_file = resolve_path(args.corpus_file or tokenizer_settings["corpus_file"])
+    min_frequency = tokenizer_settings.get("min_frequency", 2)
+    max_token_length = tokenizer_settings.get("max_token_length", 15)
     
     # Create output directory
-    os.makedirs(args.output_dir, exist_ok=True)
+    os.makedirs(output_dir, exist_ok=True)
     
     # Step 1: Find all SQLite files
-    logger.info(f"Searching for SQLite files in: {args.db_dir}")
-    db_files = find_sqlite_files(args.db_dir)
+    logger.info(f"Searching for SQLite files in: {db_dir}")
+    db_files = find_sqlite_files(db_dir)
     
     if not db_files:
-        logger.error(f"No SQLite database files found in {args.db_dir}")
+        logger.error(f"No SQLite database files found in {db_dir}")
         sys.exit(1)
     
     logger.info(f"Found {len(db_files)} database files")
@@ -552,13 +596,14 @@ def main():
     if not args.skip_corpus and not args.train_only:
         corpus_builder = AssemblyCorpusBuilder(
             db_paths=db_files,
-            max_instructions=args.max_instructions
+            max_instructions=max_instructions
         )
+        corpus_builder.corpus_file = corpus_file
         
         corpus_stats = corpus_builder.build_corpus()
         
         # Save corpus statistics
-        stats_file = os.path.join(args.output_dir, "corpus_stats.json")
+        stats_file = os.path.join(output_dir, "corpus_stats.json")
         import json
         with open(stats_file, 'w') as f:
             json.dump(corpus_stats, f, indent=2)
@@ -566,7 +611,6 @@ def main():
         
         corpus_file = corpus_builder.corpus_file
     else:
-        corpus_file = args.corpus_file
         if not os.path.exists(corpus_file):
             logger.error(f"Corpus file not found: {corpus_file}")
             sys.exit(1)
@@ -574,11 +618,11 @@ def main():
     
     # Step 3: Train tokenizer
     trainer_config = {
-        'vocab_size': args.vocab_size,
-        'min_frequency': 2,
+        'vocab_size': vocab_size,
+        'min_frequency': min_frequency,
         'special_tokens': ["[PAD]", "[UNK]", "[CLS]", "[SEP]", "[MASK]"],
-        'max_token_length': 15,
-        'save_path': args.output_dir,
+        'max_token_length': max_token_length,
+        'save_path': output_dir,
         'corpus_file': corpus_file
     }
     
@@ -588,14 +632,14 @@ def main():
         training_stats = trainer.train_tokenizer(corpus_file)
         
         # Save training statistics
-        stats_file = os.path.join(args.output_dir, "training_stats.json")
+        stats_file = os.path.join(output_dir, "training_stats.json")
         import json
         with open(stats_file, 'w') as f:
             json.dump(training_stats, f, indent=2)
         logger.info(f"Training statistics saved to: {stats_file}")
         
         # Generate a summary report
-        report_file = os.path.join(args.output_dir, "tokenizer_report.txt")
+        report_file = os.path.join(output_dir, "tokenizer_report.txt")
         with open(report_file, 'w') as f:
             f.write("=" * 60 + "\n")
             f.write("ASSEMBLY TOKENIZER TRAINING REPORT\n")
@@ -605,7 +649,7 @@ def main():
             f.write(f"Corpus File: {corpus_file}\n")
             f.write(f"Vocabulary Size: {training_stats['vocab_size']}\n")
             f.write(f"Training Time: {training_stats['training_time_seconds']:.2f} seconds\n")
-            f.write(f"Output Directory: {args.output_dir}\n")
+            f.write(f"Output Directory: {output_dir}\n")
             f.write(f"Tokenizer JSON: {training_stats['tokenizer_path']}\n")
             f.write(f"Fast Tokenizer: {training_stats['fast_tokenizer_path']}\n")
             f.write("\n" + "=" * 60 + "\n")

@@ -7,6 +7,10 @@ venv/
 *.pt
 *.pth
 
-artifacts/
+artifacts/*
+!artifacts/tokenizer/
+artifacts/tokenizer/*
+!artifacts/tokenizer/trained_assembly_tokenizer/
+!artifacts/tokenizer/trained_assembly_tokenizer/**
 
 .DS_Store

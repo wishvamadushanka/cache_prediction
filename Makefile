@@ -27,10 +27,10 @@ manifest:
 	$(PYTHON) -m config.generate_runs_manifest
 
 tokenizer:
-	$(PYTHON) -m tokernizer.train_assembly_tokenizer
+	$(PYTHON) -m tokenizer.train_assembly_tokenizer
 
 test-tokenizer:
-	$(PYTHON) -m tokernizer.test_tokenizer
+	$(PYTHON) -m tokenizer.test_tokenizer
 
 train:
 	$(PYTHON) -m train.train
